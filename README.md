@@ -7,3 +7,5 @@ CSS 적용 방법은 총 3가지
 1. css module
 2. styled-jsx
 3. styled-jsx global
+
+next.config.js 활용하여 redirect, rewrite 하는 방법
