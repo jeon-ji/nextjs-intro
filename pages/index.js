@@ -1,27 +1,18 @@
 // 파일명 === 경로명
-import { useEffect, useState } from "react";
 import Seo from "../components/Seo";
 
 // 컴포넌트명은 경로와 무관함.
-export default function Home() {
-    const [movies, setMovies] = useState();
-
-    useEffect(() => {
-      (async () => {
-        const { results } = await (await fetch(`/api/movies`)).json();
-        setMovies(results);
-      })();
-    }, []);
+// 서버에서 getServerSideProps 실행 후 results 값 받아옴
+export default function Home({ results }) {
 
     // import 없이 jsx 문법 사용 가능
     return (
         <div className="container">
             <Seo title="Home" />
-            {!movies && <h4>Loading...</h4>}
-            {movies?.map((movie) => (
+            {results?.map((movie) => (
                 <div className="movie" key={movie.id}>
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-                    <h4>{movie.original_title}</h4>
+                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                <h4>{movie.original_title}</h4>
                 </div>
             ))}
 
@@ -53,4 +44,18 @@ export default function Home() {
             `}</style> */}
         </div>
     )
+}
+
+// 이름 중요. 무조건 getServerSideProps 사용!
+// 서버쪽에서만 실행되는 코드
+// 페이지가 사용자에게 보여지기 전, props를 받아오는 함수 생성
+export async function getServerSideProps() {
+  const { results } = await (
+    await fetch(`http://localhost:3000/api/movies`)
+  ).json();
+  return {
+    props: {
+      results,
+    },
+  };
 }
