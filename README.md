@@ -9,3 +9,5 @@ CSS 적용 방법은 총 3가지
 3. styled-jsx global
 
 next.config.js 활용하여 redirect, rewrite 하는 방법
+
+server-side-rendering 하는 방법(데이터를 불러온 후 화면 생성)
