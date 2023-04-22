@@ -18,3 +18,7 @@
 ### url 조작 방법(router 활용)
 1. Link에 pathName, query, as 등을 사용하여 url 조작 및 router.query로 값 넘기기
 2. router.push를 사용하여 url 조작 및 router.query로 값 넘기기
+
+### catch-all URL 사용 방법
+[...params].js로 파일명 작성 시 router.query에 params 배열 형태로 저장
+이 프로젝트에서는 /movies/1/2/3/4/5 등 /movies에 붙는 모든 값을 params에 삽입
