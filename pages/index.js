@@ -9,15 +9,16 @@ export default function Home({ results }) {
     const router = useRouter();
 
     const onClick = (id, title) => {
-        router.push(
-          {
-            pathname: `/movies/${id}`,
-            query: {    // router.query 안에 데이터가 들어감
-              title,
-            },
-          },
-          `/movies/${id}`   // 브라우저에(사용자에게) 보일 url 주소
-        );
+        router.push(`/movies/${title}/${id}`);
+        // router.push(
+        //   {
+        //     pathname: `/movies/${id}`,
+        //     query: {    // router.query 안에 데이터가 들어감
+        //       title,
+        //     },
+        //   },
+        //   `/movies/${id}`   // 브라우저에(사용자에게) 보일 url 주소
+        // );
     }
 
     // import 없이 jsx 문법 사용 가능
@@ -29,13 +30,14 @@ export default function Home({ results }) {
                     <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
                     <h4>
                         <Link 
-                            href={{
-                                pathname: `/movies/${movie.id}`,
-                                query: {
-                                    title: movie.original_title,
-                                },
-                            }}
-                            as={`/movies/${movie.id}`}
+                            href={`/movies/${movie.original_title}/${movie.id}`}
+                            // href={{
+                            //     pathname: `/movies/${movie.id}`,
+                            //     query: {
+                            //         title: movie.original_title,
+                            //     },
+                            // }}
+                            // as={`/movies/${movie.id}`}
                         >
                             {movie.original_title}
                         </Link>
