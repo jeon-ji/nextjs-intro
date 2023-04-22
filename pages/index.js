@@ -1,18 +1,45 @@
 // 파일명 === 경로명
+import Link from "next/link";
 import Seo from "../components/Seo";
+import { useRouter } from "next/router";
 
 // 컴포넌트명은 경로와 무관함.
 // 서버에서 getServerSideProps 실행 후 results 값 받아옴
 export default function Home({ results }) {
+    const router = useRouter();
+
+    const onClick = (id, title) => {
+        router.push(
+          {
+            pathname: `/movies/${id}`,
+            query: {    // router.query 안에 데이터가 들어감
+              title,
+            },
+          },
+          `/movies/${id}`   // 브라우저에(사용자에게) 보일 url 주소
+        );
+    }
 
     // import 없이 jsx 문법 사용 가능
     return (
         <div className="container">
             <Seo title="Home" />
             {results?.map((movie) => (
-                <div className="movie" key={movie.id}>
-                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-                <h4>{movie.original_title}</h4>
+                <div key={movie.id} className="movie" onClick={() => onClick(movie.id, movie.original_title)}>
+                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                    <h4>
+                        <Link 
+                            href={{
+                                pathname: `/movies/${movie.id}`,
+                                query: {
+                                    title: movie.original_title,
+                                },
+                            }}
+                            as={`/movies/${movie.id}`}
+                        >
+                            {movie.original_title}
+                        </Link>
+                    </h4>
                 </div>
             ))}
 
@@ -22,6 +49,9 @@ export default function Home({ results }) {
                     grid-template-columns: 1fr 1fr;
                     padding: 20px;
                     gap: 20px;
+                }
+                .movie {
+                    cursor: pointer;
                 }
                 .movie img {
                     max-width: 100%;
