@@ -22,3 +22,6 @@
 ### catch-all URL 사용 방법
 [...params].js로 파일명 작성 시 router.query에 params 배열 형태로 저장
 이 프로젝트에서는 /movies/1/2/3/4/5 등 /movies에 붙는 모든 값을 params에 삽입
+
+### 404 페이지 작성 방법
+pages 폴더 안에 404.js 파일 생성 후 표출할 내용 작성
