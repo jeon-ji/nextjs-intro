@@ -8,9 +8,11 @@ export default function NavBar() {
     return (
         <nav>
             <img src="/vercel.svg" />
-            <Link href='/'><span className={router.pathname === '/' ? 'active' : ''}>Home</span></Link>
-            <Link href='/about'><span className={router.pathname === '/about' ? 'active' : ''}>About</span></Link>
-            
+            <div>
+                <Link href='/'><span className={router.pathname === '/' ? 'active' : ''}>Home</span></Link>
+                <Link href='/about'><span className={router.pathname === '/about' ? 'active' : ''}>About</span></Link>
+            </div>
+
             {/* 스타일 코드는 해당 스코프에서만 동작 ==> 다른 페이지와 클래스명 중복 고려 X */}
             {/* 태그 이름으로 css 적용 가능 */}
             <style jsx>{`
